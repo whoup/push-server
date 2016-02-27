@@ -25,7 +25,7 @@ git config --global credential.helper gcloud.sh
 git clone https://github.com/whoup/push-server.git opt/app
 
 # Install app dependencies
-cd opt/app/push-server
+cd opt/app
 npm install
 
 # Create a nodeapp user. The application will run as this user.
@@ -35,7 +35,7 @@ chown -R nodeapp:nodeapp /opt/app
 # Configure supervisor to run the node app.
 cat >/etc/supervisor/conf.d/node-app.conf << EOF
 [program:nodeapp]
-directory=/opt/app/push-server
+directory=/opt/app
 command=npm start
 autostart=true
 autorestart=true
