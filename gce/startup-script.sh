@@ -22,10 +22,10 @@ ln -s /opt/nodejs/bin/npm /usr/bin/npm
 # git requires $HOME and it's not set during the startup script.
 export HOME=/root
 git config --global credential.helper gcloud.sh
-git clone https://github.com/whoup/push-server.git
+git clone https://github.com/whoup/push-server.git opt/app
 
 # Install app dependencies
-cd push-server
+cd opt/app/push-server
 npm install
 
 # Create a nodeapp user. The application will run as this user.
@@ -35,7 +35,7 @@ chown -R nodeapp:nodeapp /opt/app
 # Configure supervisor to run the node app.
 cat >/etc/supervisor/conf.d/node-app.conf << EOF
 [program:nodeapp]
-directory=/opt/app/7-gce
+directory=/opt/app/push-server
 command=npm start
 autostart=true
 autorestart=true
