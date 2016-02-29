@@ -1,7 +1,3 @@
-# 1 - Hello world
+# 1 - Who Up Push Module
 
-This folder contains the sample code for the [Hello world][step-1]
-tutorial. Please refer to the tutorial for instructions on configuring, running,
-and deploying this sample.
-
-[step-1]: https://cloud.google.com/nodejs/getting-started/hello-world
+The push module for Who Up notifications connected to firebase.

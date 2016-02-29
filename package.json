@@ -21,8 +21,10 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "apn": "^1.7.5",
     "express": "^4.13.4",
-    "firebase": "^2.4.1"
+    "firebase": "^2.4.1",
+    "firebase-queue": "^1.2.1"
   },
   "devDependencies": {
     "jshint": "^2.9.1",
