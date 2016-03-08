@@ -8,30 +8,24 @@ var qRef = new Firebase('https://whoup.firebaseIO.com/push-notifs/');
 
 var options = {
   'numWorkers': 5,
-  'sanitize': false,
-  'suppressStack': true
 };
 var queue = new Queue(qRef, function(data, progress, resolve, reject) {
-  userRef.child(data.to).child('deviceToken').on('value', function(snapshot) {
+  userRef.child(data.to).child('deviceTokens').once('value', function(snapshot) {
     progress(50);
-    if (snapshot.val()) {
-      data.token = snapshot.val();
-      sendNotification(data);
-      resolve();
-    } else {
-      resolve();
+    var tokens = snapshot.val();
+    var tokensList = [];
+    for (var t in tokens) {
+      tokensList.push(tokens[t])
     }
-
-
+    sendNotification(data, tokensList)
+    resolve();
   });
 
 
 })
-var service = new apn.connection({production: false})
-
-function sendNotification(notificationData) {
+var service = new apn.connection();
+function sendNotification(notificationData, tokens) {
   var notification = new apn.notification();
-
   notification.sound = "ping.aiff";
   notification.alert = notificationData.message;
   notification.payload = {'fromUser': notificationData.username,
@@ -39,6 +33,5 @@ function sendNotification(notificationData) {
                           "type": notificationData.type,
                           "fromId": notificationData.from
                           };
-  service.pushNotification(notification, [notificationData.token]);
-  service.shutdown();
+  service.pushNotification(notification, tokens);
 }
