@@ -7,9 +7,9 @@ var userRef = new Firebase('https://whoup.firebaseIO.com/users');
 var qRef = new Firebase('https://whoup.firebaseIO.com/push-notifs/');
 
 var options = {
-  'numWorkers': 5,
+  'numWorkers': 10,
 };
-var queue = new Queue(qRef, function(data, progress, resolve, reject) {
+var queue = new Queue(qRef, options, function(data, progress, resolve, reject) {
   userRef.child(data.to).child('deviceTokens').once('value', function(snapshot) {
     progress(50);
     var tokens = snapshot.val();
