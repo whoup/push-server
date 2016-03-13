@@ -1,5 +1,5 @@
 #!/bin/bash
-gcloud compute instances create whoup-push-1 \
+gcloud compute instances create whoup-push \
     --machine-type=g1-small \
     --image=debian-8 \
     --scopes userinfo-email,cloud-platform \

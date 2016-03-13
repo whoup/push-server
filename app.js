@@ -23,7 +23,7 @@ var queue = new Queue(qRef, options, function(data, progress, resolve, reject) {
 
 
 })
-var service = new apn.connection();
+var service = new apn.connection({production: false});
 function sendNotification(notificationData, tokens) {
   var notification = new apn.notification();
   notification.sound = notificationData.sound;
